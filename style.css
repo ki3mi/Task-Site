@@ -5,6 +5,7 @@
     --primal: #9B9B9B;
     --cgreen: #C3EFAB;
     --cred: #EFABB2;
+    --cwhite: #fffffc
 }
 *{
     color: var(--primal);
@@ -17,8 +18,6 @@ body{
     background-color: var(--bgcolor);
     display: flex;
     flex-direction: row;
-    justify-content: center;
-    align-items: center;
     gap: 10px;
     padding: 10px;
     
@@ -32,7 +31,7 @@ body{
 
 .navbar{
     width: 20vw;
-    height: inherit;
+    height: fit-content;
 }
 
 .content{
@@ -42,10 +41,54 @@ body{
 .section{
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
 }
 
 .title{
     font-size: larger;
+}
+.searchbar{
+    display: flex;
+    background-color: var(--cgreen);
+    height: 22px;
+    width: 80%;
+    padding: 2px;
+    border-radius: 10px;
+    border-color: var(--primal);
+}
+.searchbar input{
+    background-color: transparent;
+    border-style: none;
+    width: 100%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+.formulario{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    width: 100%;
+}
+.btn{
+    background-color: var(--cred);
+    color: var(--cwhite);
+    font-weight: bold;
+    padding: 2px;
+    border-style: none;
+    border-radius: 10px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.task{
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 10px;
+}
+.list{
+    width: 100%;
 }

@@ -23,10 +23,25 @@
     <section class="content container">
         <header class="section">
             <h1 class="title">Gestor de tareas</h1>
+            <!-- Buscador -->
+             <form id="taskForm" class="formulario" action="">
+                <div class="searchbar">
+                    <input id="input" type="search" placeholder="Tarea...">
+                </div>
+                <button id="btnAdd" class="btn agregar">Agregar</button>
+             </form>
+            
         </header>
+        <!-- Tareas -->
         <main class="section">
-            <section>
-                
+            <section id="taskList" class="list">
+                <div class="task"> 
+                    <p contenteditable="true">Tarea 1</p>
+                    <section>
+                        <button id="delete" class="btn">Eliminar</button> 
+                    </section>
+                    
+                </div>
             </section>
         </main>
         <footer class="section">
