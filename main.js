@@ -23,28 +23,48 @@ taskForm.addEventListener("submit", (event)=>{
 
 // ELMINAR / EDITAR TAREAS
 taskList.addEventListener("click", (event) =>{
-    const clickElement = event.target
+    const clickElement = event.target 
     const type = event.target.id
+    const task = clickElement.closest("div") // <div>
+    const content = task.firstElementChild // <p>
+    const text = content.textContent // <p> text </p>
+    const btns = clickElement.closest("section")
     if (type === "delete"){
-        const task = clickElement.closest("div")
         const id = task.id
         deleteTaskInLocalStorage(id)
+    }if(type === "edit"){
+        const btnDelete = btns.children[0]
+        btnDelete.id = "cancel"
+        btnDelete.textContent = "Cancelar"
+        clickElement.id = "save"
+        clickElement.textContent ="Guardar"
+        content.contentEditable = "true"
+        content.focus()
+    }if(type === "save"){
+        const id = task.id
+        editTaskInLocalStorage(text, id)
+    }if(type === "cancel"){
+        const btnSave = btns.children[1]
+        const btnCancel = btns.children[0]
+        btnSave.id = "edit"
+        btnCancel.id = "delete"
+        btnSave.textContent = "Editar"
+        btnCancel.textContent = "Eliminar"
+        content.contentEditable = "false"
+        mapTasksInLocalStorage()
     }
 })
 
-
-
-
-
-//  **** FUNCTIONS ****  //
+//  **** CRUD ****  //
 
 // Agregar una tarea
 function addTask(task, id){
     taskList.insertAdjacentHTML("afterbegin",
         "<div id='"+id+"' class='task'>"
-            +"<p contenteditable = 'true'>"+task+"</p>"
+            +"<p contenteditable = 'false'>"+task+"</p>"
             +"<section>"
                 +"<button id='delete' class='btn'>Eliminar</button>"
+                +"<button id='edit' class='btn'>Editar</button>"
             +"</section>"                    
         +"</div>")
 }
@@ -75,6 +95,15 @@ function storeTaskInLocalStorage(task){
 function deleteTaskInLocalStorage(id){
     const tasks = getTaskInLocalStorage()
     tasks.splice(id, 1)
+    localStorage.setItem("tasks", JSON.stringify(tasks))
+    mapTasksInLocalStorage()
+}
+
+// Edit task
+function editTaskInLocalStorage(task, id){
+    const tasks = getTaskInLocalStorage()
+    console.log(tasks)
+    tasks[id] = task
     localStorage.setItem("tasks", JSON.stringify(tasks))
     mapTasksInLocalStorage()
 }
